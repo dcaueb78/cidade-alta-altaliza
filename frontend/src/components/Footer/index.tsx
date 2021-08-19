@@ -13,6 +13,11 @@ const Footer: React.FC = () => {
 
   const calculateDiamondsCartPriceTotal = () => {
     const cartInfos = cart.cart;
+
+    if (!cartInfos) {
+      return formattedCurrency(0);
+    }
+
     const diamondCartsInfos = cartInfos.filter((cartInfo) => cartInfo.moneyType === 'diamond');
     const totalValueArray = diamondCartsInfos.map((cartInfo) => {
       switch (cartInfo?.selectedRent) {
@@ -35,6 +40,11 @@ const Footer: React.FC = () => {
 
   const calculateDollarCartPriceTotal = () => {
     const cartInfos = cart.cart;
+
+    if (!cartInfos) {
+      return formattedCurrency(0);
+    }
+
     const diamondCartsInfos = cartInfos.filter((cartInfo) => cartInfo.moneyType === 'dollar');
     const totalValueArray = diamondCartsInfos.map((cartInfo) => {
       switch (cartInfo?.selectedRent) {

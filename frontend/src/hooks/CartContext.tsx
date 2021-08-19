@@ -37,7 +37,7 @@ const CartProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   const updateCart = useCallback(async (cartInfos) => {
-    if (data.cart.length > 0) {
+    if (data.cart && data.cart.length > 0) {
       const validateCartAlreadySelected = data.cart.length && data.cart.filter(
         (selectedCar) => (selectedCar.id === cartInfos.id),
       );

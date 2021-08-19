@@ -11,7 +11,7 @@ const CarCard = styled.li`
   background-color: #1E1E1E;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  max-width: 305px;
 
   img {
     border-radius: 15px;

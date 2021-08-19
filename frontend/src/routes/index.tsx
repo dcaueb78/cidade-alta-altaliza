@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import Cart from '../pages/Cart';
 import Route from './Route';
 
 // Routes Path
@@ -8,6 +7,7 @@ import {
   ROUTE_SIGNUP,
   ROUTE_DASHBOARD,
   ROUTE_CART,
+  ROUTE_MYCARS,
 } from '../constants/Routes';
 
 // Public Routes
@@ -15,6 +15,8 @@ import SignIn from '../pages/SignIn';
 
 // Private Routes
 import Dashboard from '../pages/Dashboard';
+import Cart from '../pages/Cart';
+import MyCars from '../pages/MyCars';
 
 import Navbar from '../components/Navbar';
 
@@ -26,6 +28,7 @@ const Routes: React.FC = () => (
     <Navbar>
       <Route path={ROUTE_DASHBOARD} exact component={Dashboard} isPrivate />
       <Route path={ROUTE_CART} exact component={Cart} isPrivate />
+      <Route path={ROUTE_MYCARS} exact component={MyCars} isPrivate />
     </Navbar>
   </Switch>
 );
