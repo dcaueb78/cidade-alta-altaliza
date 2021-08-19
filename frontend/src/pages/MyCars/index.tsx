@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 
-import Swal from 'sweetalert2';
 import { AiTwotoneCalendar } from 'react-icons/ai';
-import selectColor from 'utils/getFormattedButtonStatus';
+import selectColor from '../../utils/getFormattedButtonStatus';
 import { formatCartDays, formatCartPrice } from '../../utils/getFormattedMessages';
 import DeleteButton from '../../components/DeleteButton';
 import formatExpirationDate from '../../utils/getFormattedDate';
@@ -12,8 +11,6 @@ import { useAuth } from '../../hooks/AuthContext';
 import CarCard from '../../components/CarCard';
 import Container from '../../components/ResponsiveContainer';
 import ActionButton from '../../components/ActionButton';
-
-import { useCart } from '../../hooks/CartContext';
 
 const myCarsListMock = [{
   name: 'Carro de teste',
