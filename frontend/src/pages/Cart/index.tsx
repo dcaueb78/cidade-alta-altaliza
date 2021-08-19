@@ -2,6 +2,7 @@ import React from 'react';
 import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 
+import Footer from '../../components/Footer';
 import { formatCartDays, formatCartPrice } from '../../utils/getFormattedMessages';
 import CarCard from '../../components/CarCard';
 import Container from '../../components/ResponsiveContainer';
@@ -62,14 +63,8 @@ const Cart: React.FC = () => {
             )}
 
         </ul>
-
-        <div className="load-more">
-          <button type="button" onClick={() => console.log('handleLoadMore')}>
-            Carregar mais...
-          </button>
-        </div>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

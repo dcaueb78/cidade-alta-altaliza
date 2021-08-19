@@ -20,3 +20,8 @@ export const CART_UPDATE_ERROR: Omit<ToastMessage, 'id'> = {
   type: 'error',
   title: 'Este carro já está no seu carrinho',
 };
+
+export const CART_RENT_SUCCESS: Omit<ToastMessage, 'id'> = {
+  type: 'success',
+  title: 'Aluguel realizado com sucesso',
+};

@@ -1,7 +1,7 @@
 import React, {
   createContext, useCallback, useContext, useState,
 } from 'react';
-import { CART_UPDATE_ERROR, CART_UPDATE_SUCCESS } from '../constants/Toast';
+import { CART_RENT_SUCCESS, CART_UPDATE_ERROR, CART_UPDATE_SUCCESS } from '../constants/Toast';
 import { CART } from '../constants/Auth';
 
 import { ICarInfos } from '../pages/Dashboard';
@@ -19,6 +19,7 @@ interface ICartContextData {
     cart: ICartState;
     updateCart(cartInfos: ISelectedCarInfo): Promise<void>;
     removeCart(cartId: string): void;
+    RentCart(): void
 }
 
 const CartContext = createContext<ICartContextData>({} as ICartContextData);
@@ -64,14 +65,22 @@ const CartProvider: React.FC = ({ children }) => {
   const removeCart = useCallback(({ cartId }) => {
     const newCart = data.cart.filter((selectedCar) => selectedCar !== cartId);
 
+    localStorage.setItem(CART, JSON.stringify([newCart]));
     setData({ cart: newCart });
   }, [data.cart]);
+
+  const RentCart = useCallback(() => {
+    setData({ cart: [] });
+    localStorage.removeItem(CART);
+    addToast(CART_RENT_SUCCESS);
+  }, [addToast]);
 
   return (
     <CartContext.Provider value={{
       cart: data,
       updateCart,
       removeCart,
+      RentCart,
     }}
     >
       {children}

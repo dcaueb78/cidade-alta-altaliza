@@ -33,7 +33,7 @@ const carListMock = [{
   fifteenDaysPrice: '30.000',
   moneyType: 'diamond',
   id: 1,
-  stock: 2,
+  stock: 0,
 },
 ];
 
@@ -94,6 +94,15 @@ const Dashboard: React.FC = () => {
                 <strong>{actualCar?.name}</strong>
                 <span>{actualCar?.category}</span>
               </div>
+
+              <div>
+                <span>
+                  {' '}
+                  Estoque:
+                  {' '}
+                  {actualCar?.stock}
+                </span>
+              </div>
               <div className="car-infos">
                 <div className="car-info">
                   <p><GiGymBag /></p>
@@ -112,7 +121,9 @@ const Dashboard: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <ActionButton data-testid="submitButton" label="Alugue Agora" type="button" onClick={() => handleRentCar(actualCar)} />
+              {actualCar?.stock > 0 ? (
+                <ActionButton data-testid="submitButton" label="Alugue Agora" type="button" onClick={() => handleRentCar(actualCar)} />)
+                : (<ActionButton data-testid="submitButton" label="Sem estoque" type="button" />)}
 
             </CarCard>
           ))

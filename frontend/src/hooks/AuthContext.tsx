@@ -17,10 +17,10 @@ interface SignInCredentials {
     password: string;
 }
 
-interface userInfos {
-    id: string;
-    name: string;
+export interface userInfos {
     email: string;
+    diamonds: number,
+    dollar: number,
 }
 
 interface AuthContextData {
@@ -31,6 +31,8 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
+const baseMoney = { diamonds: 5000, dollar: 20000 };
+
 const AuthProvider: React.FC = ({ children }) => {
   const history = useHistory();
 
@@ -38,15 +40,15 @@ const AuthProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem(AUTH_USER);
 
     if (user) {
-      return { user: JSON.parse(user) };
+      return JSON.parse(user);
     }
 
     return {} as AuthState;
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    localStorage.setItem(AUTH_USER, JSON.stringify(email));
-    setData({ user: email });
+    localStorage.setItem(AUTH_USER, JSON.stringify({ user: { email, ...baseMoney } }));
+    setData({ user: { email, ...baseMoney } });
   }, []);
 
   const signOut = useCallback(() => {

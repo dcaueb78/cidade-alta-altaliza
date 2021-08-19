@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const UserNav = styled.div`
+export const UserNav = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,4 +13,15 @@ const UserNav = styled.div`
     }
 `;
 
-export default UserNav;
+export const MoneyDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+  height: 60px;
+
+  div {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+  }
+`;

@@ -8,38 +8,34 @@ import { FiLogOut } from 'react-icons/fi';
 import { HiShoppingCart, HiOutlineShoppingCart } from 'react-icons/hi';
 import { AiFillCar } from 'react-icons/ai';
 
+import MoneyIcon from 'utils/getMoneyIcon';
 import {
   ROUTE_DASHBOARD,
   ROUTE_CART,
   ROUTE_MYCARS,
 } from '../../constants/Routes';
 
-import { useAuth } from '../../hooks/AuthContext';
-import { AUTH_USER } from '../../constants/Auth';
-import UserNav from './styled';
+import { useAuth, userInfos } from '../../hooks/AuthContext';
+import { UserNav, MoneyDiv } from './styled';
 
 import LogoAltaliza from '../../assets/logo_altaliza.png';
 
-interface IUserData {
-    email?: string;
-}
-
 const Navbar:React.FC = ({ children }) => {
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
   const { pathname } = window.location;
-  const [userData, setUserData] = useState<IUserData>({} as IUserData);
+  const [userData, setUserData] = useState<userInfos>({} as userInfos);
 
   const handleSignOut = async () => {
     signOut();
   };
 
   useEffect(() => {
-    const newUserData = localStorage.getItem(AUTH_USER);
+    const newUserData = user;
 
     if (newUserData) {
-      setUserData({ email: JSON.parse(newUserData) });
+      setUserData(newUserData);
     }
-  }, [pathname]);
+  }, [user]);
 
   return (
     <>
@@ -47,6 +43,26 @@ const Navbar:React.FC = ({ children }) => {
         <Container fluid>
           <div className="d-flex align-items-center">
             <Image fluid src={LogoAltaliza} alt="Logotipo da Altaliza!" style={{ maxHeight: '90px' }} />
+            <div className="btn btn-outline-light btn-sm ml-auto">
+              COMPRAR
+            </div>
+            <MoneyDiv className="btn btn-outline-light btn-sm ml-auto">
+              <div>
+                <MoneyIcon moneyType="dollar" />
+                <p>
+                  $
+                  {userData?.dollar}
+                </p>
+              </div>
+
+              <div>
+                <MoneyIcon moneyType="diamond" />
+                <p>
+                  $
+                  {userData?.diamonds}
+                </p>
+              </div>
+            </MoneyDiv>
             <a
               href={ROUTE_DASHBOARD}
               className={
