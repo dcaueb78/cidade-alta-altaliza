@@ -1,3 +1,5 @@
+import formattedCurrency from './getFormattedCurrency';
+
 export const formatCartDays = (quantityOfDays: string):string => {
   switch (quantityOfDays) {
     case 'oneDayPrice':
@@ -12,15 +14,15 @@ export const formatCartDays = (quantityOfDays: string):string => {
 };
 
 export const formatCartPrice = (selectedRent: string, oneDayPrice: number,
-  sevenDaysPrice: number, fifteenDaysPrice: number):number => {
+  sevenDaysPrice: number, fifteenDaysPrice: number):string => {
   switch (selectedRent) {
     case 'oneDayPrice':
-      return oneDayPrice;
+      return formattedCurrency(oneDayPrice);
     case 'sevenDaysPrice':
-      return sevenDaysPrice;
+      return formattedCurrency(sevenDaysPrice);
     case 'fifteenDaysPrice':
-      return fifteenDaysPrice;
+      return formattedCurrency(fifteenDaysPrice);
     default:
-      return oneDayPrice;
+      return formattedCurrency(oneDayPrice);
   }
 };
