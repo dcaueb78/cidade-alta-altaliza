@@ -14,12 +14,13 @@ const carListMock = [{
   category: 'Veículo SUV',
   imageURL: 'https://s2.glbimg.com/mYgwlPa7vtIiUk6kROUxJUi2yyo=/0x0:620x413/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2020/a/4/Ik8J1fQYirf6wYRvRJ8Q/2020-03-20-novo-tracker-1.jpg',
   bagQuantity: 100,
-  slotsQuantity: 10,
+  slotsQuantity: 5,
   oneDayPrice: '2.500',
   sevenDaysPrice: '16.000',
   fifteenDaysPrice: '30.000',
   moneyType: 'diamond',
   id: 0,
+  stock: 2,
 },
 {
   name: 'Carro de teste',
@@ -32,6 +33,7 @@ const carListMock = [{
   fifteenDaysPrice: '30.000',
   moneyType: 'diamond',
   id: 1,
+  stock: 2,
 },
 ];
 
@@ -39,13 +41,14 @@ export interface ICarInfos {
   name: string,
   category: string,
   imageURL: string,
-  bagQuantity: Number,
-  slotsQuantity: Number,
+  bagQuantity: number,
+  slotsQuantity: number,
   oneDayPrice: string,
   sevenDaysPrice: string,
   fifteenDaysPrice: string,
-  id: Number,
+  id: number,
   moneyType: string,
+  stock: number,
 }
 
 const Dashboard: React.FC = () => {
@@ -56,13 +59,13 @@ const Dashboard: React.FC = () => {
       title: 'Selecione o tempo de aluguel',
       input: 'select',
       inputOptions: {
-        oneDayPrice: `1 dia - ${carInfos?.oneDayPrice} ${carInfos?.moneyType === 'diamond' ? 'diamantes' : 'dolar'}`,
+        oneDayPrice: `1 dia - ${carInfos?.oneDayPrice} ${carInfos?.moneyType === 'diamond' ? 'diamantes' : 'dollar'}`,
         sevenDaysPrice: `7 dias - ${carInfos?.sevenDaysPrice} diamantes`,
         fifteenDaysPrice: `15 dias - ${carInfos?.fifteenDaysPrice} diamantes `,
       },
       inputPlaceholder: 'Selecione...',
       showCancelButton: true,
-      inputValidator: (value) => new Promise((resolve) => {
+      inputValidator: () => new Promise((resolve) => {
         resolve(null);
       }),
     });

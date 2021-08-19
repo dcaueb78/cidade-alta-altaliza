@@ -15,8 +15,7 @@ import {
 } from '../../constants/Routes';
 
 import { useAuth } from '../../hooks/AuthContext';
-import { useCart } from '../../hooks/CartContext';
-import AUTH_USER from '../../constants/Auth';
+import { AUTH_USER } from '../../constants/Auth';
 import UserNav from './styled';
 
 import LogoAltaliza from '../../assets/logo_altaliza.png';
@@ -27,7 +26,6 @@ interface IUserData {
 
 const Navbar:React.FC = ({ children }) => {
   const { signOut } = useAuth();
-  const { cart } = useCart();
   const { pathname } = window.location;
   const [userData, setUserData] = useState<IUserData>({} as IUserData);
 

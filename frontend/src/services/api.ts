@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import AUTH_USER from '../constants/Auth';
+import { AUTH_USER } from '../constants/Auth';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,

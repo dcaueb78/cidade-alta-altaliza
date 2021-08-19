@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import styled from 'styled-components';
 
 const CarCard = styled.li`
   &:hover {

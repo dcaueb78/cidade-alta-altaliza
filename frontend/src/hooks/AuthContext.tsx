@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { ROUTE_SIGNUP } from '../constants/Routes';
 
-import AUTH_USER from '../constants/Auth';
+import { AUTH_USER, CART } from '../constants/Auth';
 
 interface AuthState {
     user: userInfos;
@@ -51,6 +51,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(() => {
     localStorage.removeItem(AUTH_USER);
+    localStorage.removeItem(CART);
 
     setData({} as AuthState);
 

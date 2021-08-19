@@ -2,6 +2,7 @@ import React, {
   createContext, useCallback, useContext, useState,
 } from 'react';
 import { CART_UPDATE_ERROR, CART_UPDATE_SUCCESS } from '../constants/Toast';
+import { CART } from '../constants/Auth';
 
 import { ICarInfos } from '../pages/Dashboard';
 import { useToast } from './ToastContext';
@@ -23,7 +24,15 @@ interface ICartContextData {
 const CartContext = createContext<ICartContextData>({} as ICartContextData);
 
 const CartProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<ICartState>(() => ({} as ICartState));
+  const [data, setData] = useState<ICartState>(() => {
+    const cartJson = localStorage.getItem(CART);
+
+    if (cartJson) {
+      return { cart: JSON.parse(cartJson) };
+    }
+
+    return ({} as ICartState);
+  });
   const { addToast } = useToast();
 
   const updateCart = useCallback(async (cartInfos) => {
@@ -40,12 +49,14 @@ const CartProvider: React.FC = ({ children }) => {
         newCart.push(cartInfos);
 
         setData({ cart: newCart });
+        localStorage.setItem(CART, JSON.stringify(newCart));
         addToast(CART_UPDATE_SUCCESS);
       } else {
         addToast(CART_UPDATE_ERROR);
       }
     } else {
       setData({ cart: [cartInfos] });
+      localStorage.setItem(CART, JSON.stringify([cartInfos]));
       addToast(CART_UPDATE_SUCCESS);
     }
   }, [addToast, data.cart]);

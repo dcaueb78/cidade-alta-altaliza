@@ -1,11 +1,13 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
+import Cart from '../pages/Cart';
 import Route from './Route';
 
 // Routes Path
 import {
   ROUTE_SIGNUP,
   ROUTE_DASHBOARD,
+  ROUTE_CART,
 } from '../constants/Routes';
 
 // Public Routes
@@ -23,6 +25,7 @@ const Routes: React.FC = () => (
 
     <Navbar>
       <Route path={ROUTE_DASHBOARD} exact component={Dashboard} isPrivate />
+      <Route path={ROUTE_CART} exact component={Cart} isPrivate />
     </Navbar>
   </Switch>
 );
