@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
-
-export const UserNav = styled.div`
+const UserNav = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,3 +12,5 @@ export const UserNav = styled.div`
         font-size: 14px;
     }
 `;
+
+export default UserNav;

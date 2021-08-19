@@ -5,6 +5,9 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
 import { FiLogOut } from 'react-icons/fi';
+import { HiShoppingCart, HiOutlineShoppingCart } from 'react-icons/hi';
+import { AiFillCar } from 'react-icons/ai';
+
 import {
   ROUTE_DASHBOARD,
   ROUTE_CART,
@@ -13,7 +16,7 @@ import {
 
 import { useAuth } from '../../hooks/AuthContext';
 import AUTH_USER from '../../constants/Auth';
-import { UserNav } from './styled';
+import UserNav from './styled';
 
 import LogoAltaliza from '../../assets/logo_altaliza.png';
 
@@ -52,7 +55,7 @@ const Navbar:React.FC = ({ children }) => {
                   : 'btn btn-outline-light btn-sm ml-auto'
               }
             >
-              Dashboard
+              COMPRAR
             </a>
             <a
               href={ROUTE_CART}
@@ -62,7 +65,9 @@ const Navbar:React.FC = ({ children }) => {
                   : 'btn btn-outline-light btn-sm ml-3'
               }
             >
-              Carrinho
+              {pathname.search(ROUTE_CART) >= 0
+                ? (<HiShoppingCart size={34} />)
+                : (<HiOutlineShoppingCart size={34} />)}
             </a>
             <a
               href={ROUTE_MYCARS}
@@ -72,7 +77,7 @@ const Navbar:React.FC = ({ children }) => {
                   : 'btn btn-outline-light btn-sm ml-3'
               }
             >
-              Meus Carros
+              <AiFillCar size={34} />
             </a>
             <UserNav>
               {userData && (
