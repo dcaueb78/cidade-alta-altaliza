@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 
+import { useAuth } from '../../hooks/AuthContext';
 import formatExpirationDate from '../../utils/getFormattedDate';
 import DeleteButton from '../../components/DeleteButton';
 import Footer from '../../components/Footer';
@@ -13,8 +14,36 @@ import ActionButton from '../../components/ActionButton';
 
 import { useCart } from '../../hooks/CartContext';
 
+export interface ICarInfos {
+  name: string,
+  category: string,
+  imageURL: string,
+  bagQuantity: number,
+  slotsQuantity: number,
+  oneDayPrice: number,
+  sevenDaysPrice: number,
+  fifteenDaysPrice: number,
+  id: number,
+  moneyType: string,
+  selectedRent: string,
+  stock: number,
+}
+
 const Cart: React.FC = () => {
   const { cart, removeCart } = useCart();
+  const { user } = useAuth();
+
+  const [filteredCarList, setFilteredCarList] = useState<ICarInfos[]>();
+
+  useEffect(() => {
+    if (user?.search) {
+      const newCarList = cart.cart.filter((actualCar) => actualCar
+        ?.name.toUpperCase().match(user?.search.toUpperCase()));
+      setFilteredCarList(newCarList);
+    } else {
+      setFilteredCarList(cart.cart);
+    }
+  }, [cart.cart, user?.search]);
 
   return (
     <>
@@ -26,7 +55,7 @@ const Cart: React.FC = () => {
         </h3>
         <ul>
 
-          {cart?.cart && cart?.cart?.length ? cart?.cart.map((actualCar) => (
+          {filteredCarList && filteredCarList.length > 0 ? filteredCarList.map((actualCar) => (
             <CarCard
               key={actualCar?.id}
             >
