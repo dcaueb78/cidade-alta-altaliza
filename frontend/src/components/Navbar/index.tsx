@@ -25,7 +25,7 @@ import { UserNav, MoneyDiv, SearchDiv } from './styled';
 import LogoAltaliza from '../../assets/logo_altaliza.png';
 
 const Navbar:React.FC = ({ children }) => {
-  const { user, signOut } = useAuth();
+  const { user, signOut, filter } = useAuth();
   const { pathname } = window.location;
   const [userData, setUserData] = useState<userInfos>({} as userInfos);
   const formRef = useRef<FormHandles>(null);
@@ -54,7 +54,7 @@ const Navbar:React.FC = ({ children }) => {
             <Image fluid src={LogoAltaliza} alt="Logotipo da Altaliza!" style={{ maxHeight: '90px' }} />
             <SearchDiv>
               <Form className="formInput" ref={formRef} onSubmit={handleSubmit}>
-                <Input name="filter" icon={FiSearch} placeholder="FILTRO" />
+                <Input name="filter" icon={FiSearch} placeholder="FILTRO" onChange={(e) => filter(e.target.value)} />
               </Form>
             </SearchDiv>
             <MoneyDiv className="ml-auto">

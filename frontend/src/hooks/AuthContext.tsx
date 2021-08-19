@@ -21,12 +21,14 @@ export interface userInfos {
     email: string;
     diamonds: number,
     dollar: number,
+    search: string,
 }
 
 interface AuthContextData {
     user: userInfos;
     signIn(credentials: SignInCredentials): Promise<void>;
     signOut(): void;
+    filter(value: string): void
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -47,8 +49,8 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    localStorage.setItem(AUTH_USER, JSON.stringify({ user: { email, ...baseMoney } }));
-    setData({ user: { email, ...baseMoney } });
+    localStorage.setItem(AUTH_USER, JSON.stringify({ user: { email, ...baseMoney, search: '' } }));
+    setData({ user: { email, ...baseMoney, search: '' } });
   }, []);
 
   const signOut = useCallback(() => {
@@ -60,9 +62,13 @@ const AuthProvider: React.FC = ({ children }) => {
     history.push(ROUTE_SIGNUP);
   }, [history]);
 
+  const filter = useCallback((value) => {
+    setData({ user: { ...data.user, search: value } });
+  }, [data.user]);
+
   return (
     <AuthContext.Provider value={{
-      user: data.user, signIn, signOut,
+      user: data.user, signIn, signOut, filter,
     }}
     >
       {children}

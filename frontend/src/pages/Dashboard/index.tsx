@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 
 import Swal from 'sweetalert2';
+import { useAuth } from '../../hooks/AuthContext';
 import CarCard from '../../components/CarCard';
 import Container from '../../components/ResponsiveContainer';
 import ActionButton from '../../components/ActionButton';
@@ -53,6 +54,18 @@ export interface ICarInfos {
 
 const Dashboard: React.FC = () => {
   const { updateCart } = useCart();
+  const { user } = useAuth();
+  const [filteredCarList, setFilteredCarList] = useState<ICarInfos[]>();
+
+  useEffect(() => {
+    if (user?.search) {
+      const newCarList = carListMock.filter((actualCar) => actualCar
+        ?.name.toUpperCase().match(user?.search.toUpperCase()));
+      setFilteredCarList(newCarList);
+    } else {
+      setFilteredCarList(carListMock);
+    }
+  }, [user?.search]);
 
   const handleRentCar = async (carInfos: ICarInfos) => {
     const { value: SelectedRentValue } = await Swal.fire({
@@ -85,7 +98,7 @@ const Dashboard: React.FC = () => {
         <h3>Veículos</h3>
         <ul>
 
-          {carListMock.length > 0 ? carListMock.map((actualCar) => (
+          {filteredCarList && filteredCarList.length > 0 ? filteredCarList.map((actualCar) => (
             <CarCard
               key={actualCar?.id}
             >
@@ -128,7 +141,7 @@ const Dashboard: React.FC = () => {
             </CarCard>
           ))
             : (
-              <p>oi</p>
+              <p>Nenhum carro com o filtro selecionado</p>
             )}
 
         </ul>
@@ -139,7 +152,6 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
       </Container>
-      {/* <Footer /> */}
     </>
   );
 };
