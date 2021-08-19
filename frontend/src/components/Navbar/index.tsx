@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { Container } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut, FiSearch } from 'react-icons/fi';
 import { HiShoppingCart, HiOutlineShoppingCart } from 'react-icons/hi';
 import { AiFillCar } from 'react-icons/ai';
 
-import MoneyIcon from 'utils/getMoneyIcon';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import Input from '../Input';
+
+import MoneyIcon from '../../utils/getMoneyIcon';
 import {
   ROUTE_DASHBOARD,
   ROUTE_CART,
@@ -16,7 +20,7 @@ import {
 } from '../../constants/Routes';
 
 import { useAuth, userInfos } from '../../hooks/AuthContext';
-import { UserNav, MoneyDiv } from './styled';
+import { UserNav, MoneyDiv, SearchDiv } from './styled';
 
 import LogoAltaliza from '../../assets/logo_altaliza.png';
 
@@ -24,6 +28,11 @@ const Navbar:React.FC = ({ children }) => {
   const { user, signOut } = useAuth();
   const { pathname } = window.location;
   const [userData, setUserData] = useState<userInfos>({} as userInfos);
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = () => {
+    console.log('submit');
+  };
 
   const handleSignOut = async () => {
     signOut();
@@ -43,10 +52,12 @@ const Navbar:React.FC = ({ children }) => {
         <Container fluid>
           <div className="d-flex align-items-center">
             <Image fluid src={LogoAltaliza} alt="Logotipo da Altaliza!" style={{ maxHeight: '90px' }} />
-            <div className="btn btn-outline-light btn-sm ml-auto">
-              COMPRAR
-            </div>
-            <MoneyDiv className="btn btn-outline-light btn-sm ml-auto">
+            <SearchDiv>
+              <Form className="formInput" ref={formRef} onSubmit={handleSubmit}>
+                <Input name="filter" icon={FiSearch} placeholder="FILTRO" />
+              </Form>
+            </SearchDiv>
+            <MoneyDiv className="ml-auto">
               <div>
                 <MoneyIcon moneyType="dollar" />
                 <p>
