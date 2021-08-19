@@ -1,6 +1,7 @@
 import React from 'react';
 import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
+import { AiTwotoneCalendar } from 'react-icons/ai';
 
 import Footer from '../../components/Footer';
 import { formatCartDays, formatCartPrice } from '../../utils/getFormattedMessages';
@@ -13,8 +14,28 @@ import { useCart } from '../../hooks/CartContext';
 const Cart: React.FC = () => {
   const { cart } = useCart();
 
-  return (
+  const formatExpirationDate = (quantityOfDays: string) => {
+    switch (quantityOfDays) {
+      case 'oneDayPrice': {
+        const today = new Date(Date.now() + (3600 * 1000 * 24));
+        return today.toLocaleDateString();
+      }
+      case 'sevenDaysPrice': {
+        const today = new Date(Date.now() + (3600 * 1000 * (24 * 7)));
+        return today.toLocaleDateString();
+      }
+      case 'fifteenDaysPrice': {
+        const today = new Date(Date.now() + (3600 * 1000 * (24 * 15)));
+        return today.toLocaleDateString();
+      }
+      default: {
+        const today = new Date(Date.now() + (3600 * 1000 * 24));
+        return today.toLocaleDateString();
+      }
+    }
+  };
 
+  return (
     <>
       <Container>
         <h3>
@@ -48,6 +69,12 @@ const Cart: React.FC = () => {
                     {actualCar?.slotsQuantity}
                     {' '}
                     slots
+                  </p>
+                </div>
+                <div className="car-info">
+                  <p><AiTwotoneCalendar /></p>
+                  <p>
+                    {formatExpirationDate(actualCar?.selectedRent)}
                   </p>
                 </div>
               </div>

@@ -7,14 +7,14 @@ const CarCard = styled.li`
   }
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
   padding: 15px 15px 15px 15px;
-  border-radius: 4px;
+  border-radius: 15px;
   background-color: #1E1E1E;
   display: flex;
   flex-direction: column;
   max-width: 300px;
 
   img {
-    border-radius: 4px;
+    border-radius: 15px;
   }
 
   div {
