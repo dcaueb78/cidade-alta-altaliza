@@ -49,7 +49,7 @@ export interface ICarInfos {
 }
 
 const Dashboard: React.FC = () => {
-  const { updateCart, cart } = useCart();
+  const { updateCart } = useCart();
 
   const handleRentCar = async (carInfos: ICarInfos) => {
     const { value: SelectedRentValue } = await Swal.fire({
@@ -66,8 +66,11 @@ const Dashboard: React.FC = () => {
         resolve(null);
       }),
     });
-    const formattedCarInfos = { ...carInfos, selectedRent: SelectedRentValue };
-    updateCart(formattedCarInfos);
+
+    if (SelectedRentValue) {
+      const formattedCarInfos = { ...carInfos, selectedRent: SelectedRentValue };
+      updateCart(formattedCarInfos);
+    }
   };
 
   return (
