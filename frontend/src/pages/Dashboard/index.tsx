@@ -145,12 +145,6 @@ const Dashboard: React.FC = () => {
             )}
 
         </ul>
-
-        <div className="load-more">
-          <button type="button" onClick={() => console.log('handleLoadMore')}>
-            Carregar mais...
-          </button>
-        </div>
       </Container>
     </>
   );

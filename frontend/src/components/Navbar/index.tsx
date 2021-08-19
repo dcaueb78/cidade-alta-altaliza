@@ -82,7 +82,7 @@ const Navbar:React.FC = ({ children }) => {
                   : 'btn btn-outline-light btn-sm ml-auto'
               }
             >
-              COMPRAR
+              CATÁLOGO
             </a>
             <a
               href={ROUTE_CART}
