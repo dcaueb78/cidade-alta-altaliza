@@ -10,3 +10,13 @@ export const AUTH_SIGN_SUCCESS: Omit<ToastMessage, 'id'> = {
   type: 'success',
   title: 'Logado com sucesso',
 };
+
+export const CART_UPDATE_SUCCESS: Omit<ToastMessage, 'id'> = {
+  type: 'success',
+  title: 'Adicionado ao carrinho com sucesso',
+};
+
+export const CART_UPDATE_ERROR: Omit<ToastMessage, 'id'> = {
+  type: 'error',
+  title: 'Este carro já está no seu carrinho',
+};

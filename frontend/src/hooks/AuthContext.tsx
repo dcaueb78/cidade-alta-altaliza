@@ -4,7 +4,7 @@ import React, {
 
 import { useHistory } from 'react-router-dom';
 
-import { ROUTE_SIGNUP } from 'constants/Routes';
+import { ROUTE_SIGNUP } from '../constants/Routes';
 
 import AUTH_USER from '../constants/Auth';
 
