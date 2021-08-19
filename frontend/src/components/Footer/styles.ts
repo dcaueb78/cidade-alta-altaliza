@@ -21,8 +21,8 @@ export const TotalPrice = styled.div`
 export const ContainerPrices = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 400px;
-  width: 400px;
+  max-width: 500px;
+  width: 100%;
   flex: 1;
   color: #A4A4A4;
 

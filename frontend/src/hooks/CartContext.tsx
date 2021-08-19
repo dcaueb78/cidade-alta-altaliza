@@ -44,7 +44,7 @@ const CartProvider: React.FC = ({ children }) => {
 
       const selectedCarDontExistInTheCart = !!validateCartAlreadySelected;
 
-      if (!selectedCarDontExistInTheCart) {
+      if (selectedCarDontExistInTheCart) {
         const newCart = data.cart;
         newCart.push(cartInfos);
 

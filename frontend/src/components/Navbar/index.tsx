@@ -23,12 +23,26 @@ import { useAuth, userInfos } from '../../hooks/AuthContext';
 import { UserNav, MoneyDiv, SearchDiv } from './styled';
 
 import LogoAltaliza from '../../assets/logo_altaliza.png';
+import formattedCurrency from '../../utils/getFormattedCurrency';
 
 const Navbar:React.FC = ({ children }) => {
   const { user, signOut, filter } = useAuth();
   const { pathname } = window.location;
   const [userData, setUserData] = useState<userInfos>({} as userInfos);
+  const [userDollar, setUserDollar] = useState('0');
+  const [userDiamonds, setUserDiamonds] = useState('0');
   const formRef = useRef<FormHandles>(null);
+
+  useEffect(() => {
+    const newValue = userData?.dollar ? formattedCurrency(userData?.dollar) : formattedCurrency(0);
+    setUserDollar(newValue);
+  }, [userData?.dollar]);
+
+  useEffect(() => {
+    const newValue = userData?.diamonds
+      ? formattedCurrency(userData?.diamonds) : formattedCurrency(0);
+    setUserDiamonds(newValue);
+  }, [userData?.diamonds]);
 
   const handleSubmit = () => {
     console.log('submit');
@@ -61,16 +75,14 @@ const Navbar:React.FC = ({ children }) => {
               <div>
                 <MoneyIcon moneyType="dollar" />
                 <p>
-                  $
-                  {userData?.dollar}
+                  {userDollar}
                 </p>
               </div>
 
               <div>
                 <MoneyIcon moneyType="diamond" />
                 <p>
-                  $
-                  {userData?.diamonds}
+                  {userDiamonds}
                 </p>
               </div>
             </MoneyDiv>

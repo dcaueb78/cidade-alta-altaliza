@@ -11,8 +11,8 @@ export const formatCartDays = (quantityOfDays: string):string => {
   }
 };
 
-export const formatCartPrice = (selectedRent: string, oneDayPrice: string,
-  sevenDaysPrice: string, fifteenDaysPrice: string):string => {
+export const formatCartPrice = (selectedRent: string, oneDayPrice: number,
+  sevenDaysPrice: number, fifteenDaysPrice: number):number => {
   switch (selectedRent) {
     case 'oneDayPrice':
       return oneDayPrice;
