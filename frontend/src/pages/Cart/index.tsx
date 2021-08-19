@@ -3,6 +3,7 @@ import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 
+import DeleteButton from '../../components/DeleteButton';
 import Footer from '../../components/Footer';
 import { formatCartDays, formatCartPrice } from '../../utils/getFormattedMessages';
 import CarCard from '../../components/CarCard';
@@ -12,7 +13,7 @@ import ActionButton from '../../components/ActionButton';
 import { useCart } from '../../hooks/CartContext';
 
 const Cart: React.FC = () => {
-  const { cart } = useCart();
+  const { cart, removeCart } = useCart();
 
   const formatExpirationDate = (quantityOfDays: string) => {
     switch (quantityOfDays) {
@@ -82,6 +83,7 @@ const Cart: React.FC = () => {
                 label={`${formatCartDays(actualCar?.selectedRent)} - ${formatCartPrice(actualCar?.selectedRent, actualCar?.oneDayPrice, actualCar?.sevenDaysPrice, actualCar?.fifteenDaysPrice)}`}
                 type="button"
               />
+              <DeleteButton onClick={() => removeCart(actualCar?.id)} label="Remover do carrinho" type="button" />
 
             </CarCard>
           ))

@@ -34,7 +34,7 @@ const carListMock = [{
   fifteenDaysPrice: '30.000',
   moneyType: 'diamond',
   id: 1,
-  stock: 0,
+  stock: 1,
 },
 ];
 

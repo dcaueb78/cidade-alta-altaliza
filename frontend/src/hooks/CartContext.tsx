@@ -18,7 +18,7 @@ interface ISelectedCarInfo extends ICarInfos {
 interface ICartContextData {
     cart: ICartState;
     updateCart(cartInfos: ISelectedCarInfo): Promise<void>;
-    removeCart(cartId: string): void;
+    removeCart(cartId: number): void;
     RentCart(): void
 }
 
@@ -37,15 +37,14 @@ const CartProvider: React.FC = ({ children }) => {
   const { addToast } = useToast();
 
   const updateCart = useCallback(async (cartInfos) => {
-    if (data.cart) {
+    if (data.cart.length > 0) {
       const validateCartAlreadySelected = data.cart.length && data.cart.filter(
         (selectedCar) => (selectedCar.id === cartInfos.id),
       );
 
-      const selectedCarDontExistInTheCart = validateCartAlreadySelected
-      && !validateCartAlreadySelected.length;
+      const selectedCarDontExistInTheCart = !!validateCartAlreadySelected;
 
-      if (selectedCarDontExistInTheCart) {
+      if (!selectedCarDontExistInTheCart) {
         const newCart = data.cart;
         newCart.push(cartInfos);
 
@@ -62,11 +61,10 @@ const CartProvider: React.FC = ({ children }) => {
     }
   }, [addToast, data.cart]);
 
-  const removeCart = useCallback(({ cartId }) => {
-    const newCart = data.cart.filter((selectedCar) => selectedCar !== cartId);
-
-    localStorage.setItem(CART, JSON.stringify([newCart]));
-    setData({ cart: newCart });
+  const removeCart = useCallback((cartId) => {
+    const newCarts = data.cart.filter((selectedCar) => selectedCar?.id !== cartId);
+    localStorage.setItem(CART, JSON.stringify(newCarts));
+    setData({ cart: newCarts });
   }, [data.cart]);
 
   const RentCart = useCallback(() => {
