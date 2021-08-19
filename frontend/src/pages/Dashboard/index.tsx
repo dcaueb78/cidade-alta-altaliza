@@ -3,6 +3,7 @@ import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 
 import Swal from 'sweetalert2';
+import selectColor from '../../utils/getFormattedButtonStatus';
 import { useAuth } from '../../hooks/AuthContext';
 import CarCard from '../../components/CarCard';
 import Container from '../../components/ResponsiveContainer';
@@ -32,7 +33,7 @@ const carListMock = [{
   oneDayPrice: 2500,
   sevenDaysPrice: 16000,
   fifteenDaysPrice: 30000,
-  moneyType: 'diamond',
+  moneyType: 'dollar',
   id: 1,
   stock: 1,
 },
@@ -135,8 +136,22 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
               {actualCar?.stock > 0 ? (
-                <ActionButton data-testid="submitButton" label="Alugue Agora" type="button" onClick={() => handleRentCar(actualCar)} />)
-                : (<ActionButton data-testid="submitButton" label="Sem estoque" type="button" />)}
+                <ActionButton
+                  color={selectColor(actualCar?.stock, actualCar?.moneyType)}
+                  data-testid="submitButton"
+                  label="Alugue Agora"
+                  type="button"
+                  onClick={() => handleRentCar(actualCar)}
+                />
+              )
+                : (
+                  <ActionButton
+                    color={selectColor(actualCar?.stock, actualCar?.moneyType)}
+                    data-testid="submitButton"
+                    label="Sem estoque"
+                    type="button"
+                  />
+                )}
 
             </CarCard>
           ))

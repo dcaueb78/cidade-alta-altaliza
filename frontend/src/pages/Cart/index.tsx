@@ -3,6 +3,7 @@ import { GiGymBag } from 'react-icons/gi';
 import { RiSafe2Fill } from 'react-icons/ri';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 
+import selectColor from '../../utils/getFormattedButtonStatus';
 import { useAuth } from '../../hooks/AuthContext';
 import formatExpirationDate from '../../utils/getFormattedDate';
 import DeleteButton from '../../components/DeleteButton';
@@ -89,6 +90,7 @@ const Cart: React.FC = () => {
                 </div>
               </div>
               <ActionButton
+                color={selectColor(actualCar?.stock, actualCar?.moneyType)}
                 label={`${formatCartDays(actualCar?.selectedRent)} - ${formatCartPrice(actualCar?.selectedRent, actualCar?.oneDayPrice, actualCar?.sevenDaysPrice, actualCar?.fifteenDaysPrice)}`}
                 type="button"
               />
